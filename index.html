@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Atividade de Ciências - 8º Ano | E.E. Wanda Mascagni</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: radial-gradient(circle at 10% 20%, #0a0f1e, #03060c);
+            padding: 32px 20px;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(0deg, rgba(0,0,0,0.02) 0px, rgba(0,0,0,0.02) 2px, transparent 2px, transparent 6px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #050b14 0%, #0a1a2f 55%, #021126 100%);
+            border-radius: 2rem;
+            padding: 1.6rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.05);
+            border: 1px solid rgba(25, 80, 150, 0.4);
+        }
+
+        .school-name {
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-align: center;
+            background: linear-gradient(120deg, #b3e0ff, #3c7fb0);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            margin-bottom: 1.8rem;
+        }
+
+        .student-selector-area {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin-bottom: 1.8rem;
+            background: rgba(0, 10, 25, 0.5);
+            padding: 1rem 1.2rem;
+            border-radius: 1.5rem;
+            backdrop-filter: blur(2px);
+            align-items: flex-end;
+        }
+
+        .selector-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            width: auto;
+        }
+
+        .selector-group label {
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #8bb9e0;
+            white-space: nowrap;
+        }
+
+        .elegant-select {
+            background: #0b1422;
+            border: 1px solid #1e3a5f;
+            border-radius: 60px;
+            padding: 10px 16px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #eef5ff;
+            transition: all 0.2s;
+            cursor: pointer;
+            outline: none;
+            backdrop-filter: blur(4px);
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.4), 0 2px 5px rgba(0,0,0,0.2);
+            width: auto;
+        }
+
+        /* Campo turma com largura reduzida */
+        #classSelect {
+            min-width: 110px;
+            width: auto;
+            max-width: 130px;
+        }
+
+        #studentName {
+            min-width: 260px;
+            width: auto;
+        }
+
+        .elegant-select:focus {
+            border-color: #2c6e9e;
+            box-shadow: 0 0 0 3px rgba(44, 110, 158, 0.3);
+            background: #0f1a2c;
+        }
+
+        .info-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.8rem;
+            align-items: center;
+        }
+
+        .info-card {
+            background: rgba(2, 12, 24, 0.7);
+            border-radius: 60px;
+            padding: 0.4rem 1rem;
+            display: inline-flex;
+            align-items: baseline;
+            gap: 8px;
+            backdrop-filter: blur(4px);
+            border: 1px solid #1c3e60;
+            width: auto;
+        }
+
+        .info-label {
+            font-weight: 700;
+            font-size: 0.7rem;
+            color: #7da5ca;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .info-field-static {
+            background: transparent;
+            border: none;
+            font-weight: 600;
+            color: #cde4ff;
+            font-size: 0.85rem;
+            padding: 4px 0;
+            width: auto;
+            outline: none;
+        }
+
+        #studentNumber {
+            width: 45px;
+            text-align: center;
+        }
+
+        #studentTurma {
+            width: auto;
+            min-width: 85px;
+        }
+
+        #currentDate {
+            width: 100px;
+            text-align: center;
+        }
+
+        .activity-title {
+            text-align: center;
+            margin-top: 1.2rem;
+            padding-top: 1rem;
+            border-top: 1px dashed #1e4970;
+        }
+
+        .activity-main {
+            font-size: 1.2rem;
+            font-weight: 800;
+            display: block;
+            color: #c2dcff;
+            margin-bottom: 0.6rem;
+            letter-spacing: 1px;
+        }
+
+        .activity-sub {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #9bc0e0;
+            display: block;
+            letter-spacing: 0.5px;
+        }
+
+        .question-container {
+            background: linear-gradient(145deg, #07121f 0%, #010a17 100%);
+            border-radius: 1.8rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem 1.8rem;
+            box-shadow: 0 18px 30px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(66, 133, 200, 0.2);
+            border: 1px solid #1a3752;
+            transition: transform 0.2s ease, box-shadow 0.2s;
+        }
+
+        .question-container:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 22px 35px -14px black;
+            border-color: #2a6285;
+        }
+
+        .question {
+            font-weight: 700;
+            font-size: 1.05rem;
+            line-height: 1.45;
+            color: #d9ecff;
+            margin-bottom: 1rem;
+            padding-left: 6px;
+            border-left: 4px solid #2c7ab1;
+        }
+
+        .question-image {
+            max-width: 100%;
+            max-height: 200px;
+            object-fit: contain;
+            margin: 0.8rem 0;
+            border-radius: 1rem;
+            background: #030c18;
+            padding: 8px;
+            border: 1px solid #204e72;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .option {
+            background: linear-gradient(105deg, #0b1828, #030c1a);
+            border-radius: 60px;
+            padding: 10px 16px 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #1f4562;
+            color: #e2f0ff;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .option::before {
+            content: attr(data-letter) ".";
+            font-weight: 800;
+            font-size: 1rem;
+            background: #152c40;
+            width: 28px;
+            height: 28px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 40px;
+            color: #b8defa;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+
+        .option:hover {
+            background: linear-gradient(105deg, #102337, #04111f);
+            border-color: #3f7dad;
+            transform: scale(1.01);
+        }
+
+        /* ESTILO DA ALTERNATIVA SELECIONADA COM ILUMINAÇÃO CIRCULAR NAS BORDAS */
+        .option.selected {
+            background: linear-gradient(105deg, #062a46, #001a30);
+            border: 1px solid #2c9bdb;
+            color: white;
+            box-shadow: 0 0 0 2px rgba(44, 155, 219, 0.4), 0 0 0 6px rgba(44, 155, 219, 0.2), 0 0 15px rgba(44, 155, 219, 0.5);
+            animation: pulseGlow 1.2s ease-in-out infinite;
+            position: relative;
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                box-shadow: 0 0 0 2px rgba(44, 155, 219, 0.4), 0 0 0 6px rgba(44, 155, 219, 0.2), 0 0 12px rgba(44, 155, 219, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 0 3px rgba(44, 155, 219, 0.6), 0 0 0 8px rgba(44, 155, 219, 0.3), 0 0 20px rgba(44, 155, 219, 0.7);
+            }
+            100% {
+                box-shadow: 0 0 0 2px rgba(44, 155, 219, 0.4), 0 0 0 6px rgba(44, 155, 219, 0.2), 0 0 12px rgba(44, 155, 219, 0.4);
+            }
+        }
+
+        .option.selected::before {
+            background: #1f6390;
+            color: white;
+            box-shadow: 0 0 8px #3aa8ff;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px 24px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            border: none;
+            border-radius: 60px;
+            background: linear-gradient(115deg, #0a1a2c, #021023);
+            color: #e3f0ff;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+            border: 1px solid #2b6085;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(115deg, #112a42, #02172f);
+            border-color: #4188b5;
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        #submitBtn {
+            background: linear-gradient(115deg, #0f3b58, #011b30);
+            border-color: #3e86b3;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 0.8rem 1.5rem;
+            border-radius: 3rem;
+            background: linear-gradient(145deg, #0b1729, #030c1a);
+            border-left: 6px solid;
+            display: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .success {
+            border-left-color: #2bc48a;
+            color: #c6ffdf;
+            background: #05221b80;
+        }
+
+        .error {
+            border-left-color: #e05561;
+            color: #ffcfcf;
+            background: #2f0f1480;
+        }
+
+        @media (max-width: 700px) {
+            .header { padding: 1.2rem; }
+            .question-container { padding: 1.2rem; }
+            .option { padding: 8px 12px; font-size: 0.85rem; }
+            .student-selector-area { flex-direction: column; align-items: stretch; }
+            .selector-group { width: 100%; }
+            .elegant-select { width: 100%; }
+            #classSelect { max-width: none; }
+            #studentName { min-width: unset; }
+            .info-row { flex-direction: column; align-items: stretch; }
+            .info-card { width: fit-content; }
+            .option.selected {
+                animation: pulseGlow 1s ease-in-out infinite;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="school-name">E.E. PROFª WANDA MASCAGNI DE SÁ</div>
+        
+        <div class="student-selector-area">
+            <div class="selector-group">
+                <label>📌 1. SELECIONE SUA TURMA</label>
+                <select id="classSelect" class="elegant-select">
+                    <option value="" disabled selected>— Escolha a turma —</option>
+                    <option value="8º Ano A">8º Ano A</option>
+                    <option value="8º Ano B">8º Ano B</option>
+                </select>
+            </div>
+            <div class="selector-group">
+                <label>👤 2. SELECIONE SEU NOME</label>
+                <select id="studentName" class="elegant-select" disabled>
+                    <option value="">Primeiro escolha a turma</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="info-row">
+            <div class="info-card">
+                <span class="info-label">Nº:</span>
+                <input type="text" id="studentNumber" class="info-field-static" readonly value="—">
+            </div>
+            <div class="info-card">
+                <span class="info-label">TURMA:</span>
+                <input type="text" id="studentTurma" class="info-field-static" readonly value="—">
+            </div>
+            <div class="info-card">
+                <span class="info-label">DATA:</span>
+                <input type="text" id="currentDate" class="info-field-static" readonly>
+            </div>
+        </div>
+
+        <div class="activity-title">
+            <div class="activity-main">ATIVIDADE DE CIÊNCIAS</div>
+            <div class="activity-sub">REPRODUÇÃO E HEREDITARIEDADE</div>
+        </div>
+    </div>
+
+    <div id="questionsContainer"></div>
+
+    <div class="buttons">
+        <button id="submitBtn">📤 ENVIAR RESPOSTAS</button>
+        <button id="clearBtn">🗑️ LIMPAR RESPOSTAS</button>
+    </div>
+    <div id="resultMessage" class="result"></div>
+</div>
+
+<script>
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby_dL3RV624aGGMnzK8AXHdfVPAqo3-EjvhR1wrkV3Ie-1MrpVwuT14qQfRh_j4Zdc/exec";
+
+    // LISTAS DE ALUNOS CORRIGIDAS conforme dados fornecidos
+    const students = {
+        "8º Ano A": [
+            { number: "1", name: "ALICE CARDOSO DE ALCANTARA" },
+            { number: "2", name: "ANA LUIZA VALENCA PAIVA" },
+            { number: "3", name: "BRYAN DINIZ SILVA" },
+            { number: "4", name: "CARLOS EDUARDO MENEZES MACHADO" },
+            { number: "5", name: "EVANDRO CUTOLO TEIXEIRA" },
+            { number: "7", name: "GABRIELA SANTOS COSTA" },
+            { number: "9", name: "GUILHERME CARMO RODRIGUES" },
+            { number: "10", name: "GUSTAVO HENRIQUE DA SILVA" },
+            { number: "11", name: "ISAAC FERNANDES DE ANDRADE" },
+            { number: "12", name: "KELVIN DUARTE GONCALVES" },
+            { number: "13", name: "LAURA VITORIA ROCHA" },
+            { number: "14", name: "LETICIA CUSTODIO LIMA" },
+            { number: "15", name: "LUCAS EDUARDO DA SILVA SANTANA" },
+            { number: "16", name: "MIGUEL LIMA DE MESQUITA" },
+            { number: "17", name: "NICOLAS ROCHA SILVA" },
+            { number: "18", name: "PAOLLA MICHELLINE DOS SANTOS MARQUES" },
+            { number: "19", name: "PEDRO HENRIQUE CORREA DE BRITO" },
+            { number: "20", name: "RAPHAEL MATHIAS NUNES MIRANDA" },
+            { number: "21", name: "RYAN GABRIEL PEREIRA DE SOUSA" },
+            { number: "22", name: "SAMUEL ALVES DA COSTA" },
+            { number: "23", name: "SOFIA AZEREDO CUBAS" },
+            { number: "24", name: "SOPHIA LACERDA ANDRADE" },
+            { number: "25", name: "THAYLLA DUANNY VENANCIO SCAQUITO" },
+            { number: "26", name: "THAYS RODRIGUES DA SILVA" },
+            { number: "27", name: "VICTOR HENRIQUE BENVINDO" },
+            { number: "28", name: "KAROLAYNE DOS SANTOS BISSORNIA" },
+            { number: "29", name: "ANA VICTORIA RAGACINI DE OLIVEIRA" },
+            { number: "31", name: "RODOLFO RAFAEL GOLZENLEUCHTER MORENO JUNIOR" },
+            { number: "32", name: "RAQUEL BARGAS TAVARES DOS SANTOS" },
+            { number: "33", name: "LEONARDO MENOIA" },
+            { number: "34", name: "MATHEUS KAUÃ DOS SANTOS NASCIMENTO" },
+            { number: "35", name: "MAYARA CAETANO DE OLIVEIRA PINA" },
+            { number: "36", name: "ANA CLARA VILA NOVA GONCALVES" },
+            { number: "37", name: "PATRICIA SEGURA" },
+            { number: "38", name: "RAFAEL HENRIQUE SIQUEIRA BERNARDES ZIA" }
+        ],
+        "8º Ano B": [
+            { number: "1", name: "ANGELLO GABRIEL CUTOLO TEIXEIRA" },
+            { number: "2", name: "ARTHUR HENRIQUE MARQUES ENDRES" },
+            { number: "3", name: "BIANCA CRISTINA DA SILVA SANTOS" },
+            { number: "4", name: "BRAYAN DA SILVA FERREIRA" },
+            { number: "5", name: "BRAYAN DUARTE DA SILVA" },
+            { number: "6", name: "BRUNO LUIZ NASCIMENTO DA SILVA" },
+            { number: "7", name: "CRISTIANO MARQUES BATISTA DE SOUZA" },
+            { number: "8", name: "DANIEL RODRIGUES SANTOS DIAS" },
+            { number: "9", name: "DIEGO BARRIO NOVO AMARAL DE ANDRADE" },
+            { number: "10", name: "FABRICIO LORENZO PARMA" },
+            { number: "11", name: "GABRIELA PAULINA FERREIRA MARTINS" },
+            { number: "12", name: "HYLLARY VICTORIA NERCIR DE FRANÇA" },
+            { number: "13", name: "JHONAS KEYRRISON TROCATIS DA SILVA" },
+            { number: "14", name: "JULIA VITORIA SEVERA LINS" },
+            { number: "16", name: "KESIA DOS SANTOS SOSTE" },
+            { number: "17", name: "LAURA BORGES AZEVEDO" },
+            { number: "18", name: "LUAN DANTAS NICOLUCCI" },
+            { number: "19", name: "LUAN RIBEIRO SILVA" },
+            { number: "20", name: "MANUELA ANGELICA TRIANA DA SILVA" },
+            { number: "21", name: "MARCELO GOMES THOMAZ" },
+            { number: "22", name: "MARCOS CELIO DE JESUS" },
+            { number: "25", name: "PAULO CESAR LAMBERT GONÇALVES" },
+            { number: "26", name: "PEDRO HENRIQUE OLIVEIRA GOMES" },
+            { number: "27", name: "PIETRO MARTINS NOBRE" },
+            { number: "28", name: "SOPHIA FRANCA DE CARVALHO" },
+            { number: "29", name: "VICTOR HUGO PRADO SANTOS DE BARROS" },
+            { number: "31", name: "WALLIF LEANDRO DE JESUS LESSA" },
+            { number: "33", name: "VITORIA JOLIE RODRIGUES RAPOSO" },
+            { number: "34", name: "ISAAC BONFIM VIDOTTO" },
+            { number: "35", name: "MATEUS DE JESUS JACINTO DOS SANTOS" },
+            { number: "36", name: "KHIARA DE OLIVEIRA SILVA" },
+            { number: "37", name: "MARIA EDUARDA MACHADO DE LIMA" },
+            { number: "40", name: "ESTER CODINA DE JESUS" },
+            { number: "41", name: "PABLO HENRIQUE DUARTE DA SILVA" }
+        ]
+    };
+
+    // 10 QUESTÕES completas
+    const questions = [
+        { id:1, question:"Durante as aulas sobre reprodução dos seres vivos, vimos que os organismos se reproduzem para manter a continuidade da espécie. Existem dois grandes tipos de reprodução: a sexuada e a assexuada. Qual das alternativas abaixo apresenta corretamente a principal diferença entre esses dois tipos de reprodução?", image:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjP7rJcRjw15VJyAtnJbxfBG6ZdIxAi8a_Yb7DJk3z5VeL7TMKXv_1VCDEd2O4x2b87d0m4F96lR0J-4kN-V_K7S0ZVh-xD5VKpf-MCJhZRGkpjr3YexH3pI3KYG1vDrBXPLLm6uM2W3a0Gqd7uieTjlE4CgPRNkZO4bVp4qNbYidmB5w_ERfQP2fzHC/s450/reproducao_seres_vivos.jpg", options:[{text:"Na reprodução sexuada, ocorre a fusão de gametas de dois indivíduos gerando descendentes com material genético combinado, enquanto na assexuada um único organismo origina novos indivíduos geneticamente idênticos.",correct:true},{text:"Na reprodução assexuada, há sempre a participação de dois organismos de sexos diferentes, enquanto a sexuada ocorre por divisão celular de um único indivíduo.",correct:false},{text:"A reprodução sexuada só ocorre em animais, enquanto a reprodução assexuada é exclusiva de plantas e fungos.",correct:false},{text:"A reprodução assexuada gera descendentes com maior variabilidade genética do que a reprodução sexuada.",correct:false}] },
+        { id:2, question:"Nas aulas sobre reprodução assexuada, estudamos diferentes formas pelas quais os seres vivos se reproduzem sem a participação de gametas. Observe as situações abaixo e identifique qual delas NÃO representa uma forma de reprodução assexuada:", image:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhKb2vEKc7EJqo-oMGHkBR7VF8u0iFTSMD-ks7J-rGaRNj_fJrB2RVBIlV4MxBOvAbAP0rZ7Ua5xJVTy6z1A7wUFrfNv9iA1dPT5E6hzNsTh4GXxX8xOxLfpY3RRoB_QMbMj58M3dJMRj3VDEAUnfL-hSEv0-Y2MDPaqpFbX5lZ1-vLiMxYqSJfIKBK/s450/reproducao_assexuada.jpg", options:[{text:"Um pedaço do caule de uma planta é retirado e plantado, originando uma nova planta idêntica à original (estaquia).",correct:false},{text:"Uma bactéria se divide ao meio por bipartição, gerando dois organismos com o mesmo material genético.",correct:false},{text:"Uma fêmea e um macho de peixe liberam óvulos e espermatozoides na água, onde ocorre a fecundação e o desenvolvimento dos filhotes.",correct:true},{text:"Uma planária é cortada ao meio e cada fragmento regenera a parte que falta, formando dois organismos completos.",correct:false}] },
+        { id:3, question:"A mitose é um processo de divisão celular fundamental para o crescimento e regeneração dos organismos. Sobre a mitose, é correto afirmar que:", image:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiP3Tox4Tv13Vy83OC1LLxYd0JFhsm0UaWFHifZq1V6WXAHxYolaxbCpzPlW2h9nLEVnuYBR7x3uR4JFCf5xFcZfCHJiDU6WFx7uKMOE8wZ52tOZrm4VBrFyp3GGzETF7P7Y2HJPgm7p0h_SQV8bvvWnzBrquUFUhFMiN_U5vJzekHXMoZ5jC0IcPMpT/s450/mitose_celulas.jpg", options:[{text:"A mitose produz quatro células-filhas com metade do número de cromossomos da célula original, sendo utilizada na formação de gametas.",correct:false},{text:"A mitose produz duas células-filhas com o mesmo número de cromossomos da célula-mãe, sendo responsável pelo crescimento e regeneração dos tecidos.",correct:true},{text:"Durante a mitose, ocorre o cruzamento (crossing-over) entre cromossomos homólogos, o que aumenta a variabilidade genética dos descendentes.",correct:false},{text:"A mitose só ocorre nas células reprodutivas (gametas), sendo exclusiva dos ovários e testículos nos animais.",correct:false}] },
+        { id:4, question:"Estudamos que a meiose é o tipo de divisão celular responsável pela formação dos gametas (óvulos e espermatozoides). Uma característica fundamental da meiose é que ela reduz o número de cromossomos à metade. Por que essa redução é essencial para a reprodução sexuada?", image:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiIHlCqZjFgKiOPY8MLp3JE6TGJd38FBnAOT6AiPD3EWerBQvmPVSgimgpK2f_hcFJW5IA4rVCcq55KZXZVh8Ik78nfOqgDAL4FHyKALDAZ0xXBv0mXy5JJZvdHJHmpyCPE_K_nSYmJAf3TXOXLBi-5F1Jd1GJuFefaJnLWBBQ7i7s2oNP7wHHoN4Rfco/s450/meiose_gametas.jpg", options:[{text:"Para que os gametas tenham mais energia disponível durante a fecundação, já que células menores precisam de menos nutrientes.",correct:false},{text:"Para que, ao ocorrer a fusão dos gametas durante a fecundação, o zigoto formado tenha o número correto de cromossomos da espécie — e não o dobro.",correct:true},{text:"Para que os gametas possam se locomover com maior velocidade até encontrar o gameta do sexo oposto.",correct:false},{text:"Porque células com menos cromossomos vivem mais tempo, aumentando as chances de fecundação bem-sucedida.",correct:false}] },
+        { id:5, question:"Na reprodução sexuada, a fecundação pode ser interna ou externa. Qual alternativa descreve corretamente a diferença entre esses dois tipos de fecundação e apresenta um exemplo adequado de cada?", image:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh7lOq9TGlTyJPLKdmPBl5FuPcXWMOLNmI8lKn9HqsHLPYTicjU8FiKlMlRXmgFXhkknY9Ro5lFpqeHHhw0Z6Ie2E-cJlQhFaUdJAX6mvlJSHy-sGHhcbj3A5MEHHLXb_M5p1S9Dz3O-bKXEhJRlwCMkEFqDbbJFfEy2f97DyWAP5u5XXNYt1wJi5IEq/s450/fecundacao_interna_externa.jpg", options:[{text:"Na fecundação interna, a união dos gametas ocorre no interior do corpo da fêmea (ex.: mamíferos, répteis); na externa, ocorre fora do corpo, geralmente na água (ex.: a maioria dos peixes e anfíbios).",correct:true},{text:"Na fecundação interna, os ovos são depositados no ambiente após a fertilização; na externa, os filhotes já nascem completamente desenvolvidos sem passar por estágio de ovo.",correct:false},{text:"A fecundação interna é exclusiva dos mamíferos, enquanto a fecundação externa é característica apenas das aves.",correct:false},{text:"A fecundação externa produz descendentes mais saudáveis, pois os ovos recebem proteção do ambiente externo durante todo o desenvolvimento.",correct:false}] },
+        { id:6, question:"Durante o estudo das plantas, aprendemos que elas também se reproduzem sexuadamente. A flor é o órgão reprodutor das angiospermas. Sobre a reprodução das plantas com flores, qual das alternativas está correta?", image:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhEWj2tLAPM1qgj6YtgwJBTkjFLi-tz5N5LpVxjRFCSmxaH4VKa7FxdU1dFKbH0NXHOl1_7N4hgU5nF5ERxFVmG2LsK6NiyA8A-l01YAUzXAa2HWVSYHFklxxE0wHD03wgajbv1WMVyRJGhVNr2RSICC2Gi2U2cxpUvVaBbwEhpBNMtJnnePi_QRwxBpX/s450/flor_reproducao_planta.jpg", options:[{text:"O pólen, produzido nas anteras, contém os gametas masculinos; quando transportado até o estigma de outra flor (polinização), pode ocorrer a fecundação e formação do fruto e semente.",correct:true},{text:"Nas plantas, a fecundação ocorre pela fusão das pétalas de duas flores diferentes, gerando uma semente combinada.",correct:false},{text:"Apenas os insetos podem fazer a polinização; sem eles, as plantas com flores seriam incapazes de se reproduzir.",correct:false},{text:"O fruto é formado antes da fecundação, servindo como atrativo para que os animais transportem o pólen até as anteras.",correct:false}] },
+        { id:7, question:"A hereditariedade explica como as características dos pais são transmitidas aos filhos. Gregor Mendel, considerado o pai da genética, estudou a transmissão de características na ervilha. Sobre os conceitos básicos de hereditariedade estudados em nossas aulas, qual afirmativa está correta?", image:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOC4q0XmJpb6MF4jzwwHq9TmV5fL3LfQ2r6rBlFGdWuJpA_pIz2FuNb0OTxo3XIPfqN0N9xTAXdflzr0_o7QnFrGMkbVuTe08JrJV46YKpLfFkD6lH7x0hLPwBHMJR4nbGHRz2bLYLVFW_xTw8Y8ggfUJV-U2a6Gta6LLKjFJX3ePl77-xNNuBILKqP/s450/hereditariedade_mendel.jpg", options:[{text:"Os filhos recebem material genético apenas da mãe, pois é ela quem carrega o bebê durante a gestação.",correct:false},{text:"Cada indivíduo herda um alelo de cada gene do pai e um alelo do mesmo gene da mãe, combinando o material genético de ambos nos cromossomos do zigoto.",correct:true},{text:"Características adquiridas ao longo da vida, como músculos desenvolvidos pela prática de esportes, são transmitidas diretamente aos filhos.",correct:false},{text:"Gêmeos univitelinos possuem material genético completamente diferente, pois cada um se desenvolveu a partir de um óvulo distinto.",correct:false}] },
+        { id:8, question:"Em uma família, o pai tem tipo sanguíneo A (genótipo I^A i) e a mãe tem tipo sanguíneo B (genótipo I^B i). Considerando a herança do sistema ABO e os conceitos de dominância que estudamos, quais tipos sanguíneos são possíveis nos filhos desse casal?", image:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiNqDHtqZBD5zFc7iJb2PNS5Vbj0mVw0ZIJwqsLGNTZ_VWwJ4Q_kZx6Cz8l-W3Bq9MQiJbhvdLBi49uNFoaCLj0QbbJXWfKKVS1i1Mq8AVJiIRFLKWKYbH3mZULiV9fOhqMI9djJvBk8Oj6Qg6JBHf1BrJmumeSi-y5VyLnRkuFJNlX3kMmkf3jzp2/s450/sistema_abo.jpg", options:[{text:"Os filhos só podem ter tipo sanguíneo AB, pois um alelo vem do pai (I^A) e o outro vem da mãe (I^B).",correct:false},{text:"Os filhos só podem ter tipos A ou B, pois os pais possuem apenas esses tipos sanguíneos.",correct:false},{text:"Os filhos podem ter tipo A, tipo B, tipo AB ou tipo O — dependendo de qual alelo herdam de cada genitor.",correct:true},{text:"Nenhum filho pode ter tipo O, pois nenhum dos pais apresenta esse tipo sanguíneo.",correct:false}] },
+        { id:9, question:"O desenvolvimento embrionário humano passa por etapas fundamentais após a fecundação. Sobre esse processo, assinale a alternativa correta:", image:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgxXUZ6sDfkXk0VQML7BPPa2EUn1hRrQq7ZKiwy-ZUeV92TlOUL4u5GZq0f-Z9S5rTYP-gfOXpMFsfmDOGfQ3ixZ9rqW83Ntc48DwR-qXKz4vI-WASpC6lqhcH-HkKB3SCN-nO3J9yHwUY/s450/embriologia_humana.jpg", options:[{text:"O zigoto sofre sucessivas divisões mitóticas formando a mórula, que posteriormente se transforma em blastocisto, que se implanta no útero.",correct:true},{text:"O embrião se desenvolve diretamente no ovário, e só após o nascimento ocorre a implantação no útero.",correct:false},{text:"A nidação ocorre nas trompas de Falópio, onde o embrião permanece até o final da gestação.",correct:false},{text:"O sistema nervoso é o último sistema a se formar no desenvolvimento embrionário.",correct:false}] },
+        { id:10, question:"A gravidez na adolescência envolve diversos aspectos biológicos, psicológicos e sociais. Sobre a reprodução humana e a puberdade, é correto afirmar que:", image:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhKV8evSXfYdwTSBQhPzlDix8CSPB04vkgJu1vP1pQ80CvwlHbuE8Qgrnjp2oQEr9OEWS6p_T0bTSMyHxHUTVjZheDnYOfQNUHguy22rNZbSV8KqVjQ0dEOEruy6C2xLEQLyDZq4mERIuc/s450/puberdade_reproducao.jpg", options:[{text:"A primeira menstruação (menarca) indica que a adolescente já está completamente preparada para uma gestação saudável, sem riscos.",correct:false},{text:"Na puberdade, os gametas começam a ser produzidos, mas o corpo ainda está em desenvolvimento, sendo importante orientação sobre métodos contraceptivos e prevenção de ISTs.",correct:true},{text:"A ovulação ocorre apenas uma vez na vida da mulher, durante a primeira menstruação.",correct:false},{text:"A produção de espermatozoides nos meninos só começa após os 20 anos de idade.",correct:false}] }
+    ];
+
+    const correctAnswersMap = {};
+    questions.forEach(q => { q.options.forEach((opt, idx) => { if(opt.correct) correctAnswersMap[`q${q.id}`] = String.fromCharCode(65+idx); }); });
+
+    function showResult(msg, type) { const el = document.getElementById("resultMessage"); el.innerHTML = msg; el.className = `result ${type}`; el.style.display = "block"; }
+    function hideResult() { document.getElementById("resultMessage").style.display = "none"; }
+
+    function renderQuestions() {
+        const container = document.getElementById("questionsContainer");
+        container.innerHTML = "";
+        questions.forEach(q => {
+            const block = document.createElement("div");
+            block.className = "question-container";
+            block.id = `q${q.id}`;
+            let optionsHtml = `<div class="options">`;
+            q.options.forEach((opt, idx) => {
+                const letter = String.fromCharCode(65+idx);
+                optionsHtml += `<div class="option" data-question="${q.id}" data-letter="${letter}">${opt.text}</div>`;
+            });
+            optionsHtml += `</div>`;
+            block.innerHTML = `<p class="question"><strong>${q.id}.</strong> ${q.question}</p>${q.image ? `<img src="${q.image}" class="question-image" onerror="this.style.display='none'">` : ""}${optionsHtml}`;
+            container.appendChild(block);
+        });
+        document.querySelectorAll(".option").forEach(opt => { 
+            opt.onclick = () => { 
+                const parent = opt.closest(".options"); 
+                parent.querySelectorAll(".option").forEach(o => o.classList.remove("selected")); 
+                opt.classList.add("selected"); 
+                hideResult(); 
+            }; 
+        });
+    }
+
+    function populateStudentsByClass(className) {
+        const studentSelect = document.getElementById("studentName");
+        const turmaField = document.getElementById("studentTurma");
+        studentSelect.innerHTML = '<option value="" disabled selected>— Selecione seu nome —</option>';
+        if (!className || !students[className]) {
+            studentSelect.disabled = true;
+            document.getElementById("studentNumber").value = "—";
+            turmaField.value = "—";
+            return;
+        }
+        studentSelect.disabled = false;
+        students[className].forEach(s => {
+            const opt = document.createElement("option");
+            opt.value = `${s.number}|${className}|${s.name}`;
+            opt.textContent = s.name;
+            studentSelect.appendChild(opt);
+        });
+        turmaField.value = className;
+        document.getElementById("studentNumber").value = "—";
+    }
+
+    document.getElementById("classSelect").addEventListener("change", (e) => {
+        const turma = e.target.value;
+        populateStudentsByClass(turma);
+        document.getElementById("studentName").value = "";
+        document.getElementById("studentNumber").value = "—";
+        hideResult();
+    });
+
+    document.getElementById("studentName").addEventListener("change", (e) => {
+        const val = e.target.value;
+        if (!val) { document.getElementById("studentNumber").value = "—"; return; }
+        const [num] = val.split("|");
+        document.getElementById("studentNumber").value = num;
+        hideResult();
+    });
+
+    document.getElementById("clearBtn").onclick = () => {
+        document.querySelectorAll(".option.selected").forEach(o => o.classList.remove("selected"));
+        hideResult();
+    };
+
+    document.getElementById("submitBtn").onclick = async () => {
+        hideResult();
+        const classSelect = document.getElementById("classSelect");
+        const studentSelect = document.getElementById("studentName");
+        if (!classSelect.value) { showResult("❌ Primeiro selecione a TURMA.", "error"); return; }
+        if (!studentSelect.value) { showResult("❌ Agora selecione seu NOME.", "error"); return; }
+        const [studentNumber, studentTurma, studentName] = studentSelect.value.split("|");
+        let allAnswered = true;
+        const answers = {};
+        for(let q of questions) {
+            const selected = document.querySelector(`#q${q.id} .option.selected`);
+            if(!selected) { allAnswered = false; break; }
+            answers[`q${q.id}`] = selected.dataset.letter;
+        }
+        if(!allAnswered) { showResult(`⚠️ Responda todas as ${questions.length} questões antes de enviar.`, "error"); return; }
+        let correctCount = 0;
+        for(let q of questions) {
+            if(answers[`q${q.id}`] === correctAnswersMap[`q${q.id}`]) correctCount++;
+        }
+        const payload = { studentName, studentNumber, studentTurma, finalScore: correctCount, totalQuestions: questions.length, percentage: (correctCount/questions.length)*100, ...answers };
+        showResult(`📊 Você acertou ${correctCount}/${questions.length}. Enviando...`, "success");
+        try {
+            const response = await fetch(GOOGLE_SCRIPT_URL, { method: "POST", body: JSON.stringify(payload) });
+            const json = await response.json();
+            if(json.status === "success") showResult(`✅ Registrado! Nota: ${correctCount}/${questions.length}.`, "success");
+            else showResult(`⚠️ Erro: ${json.message || "tente novamente"}`, "error");
+        } catch(err) { showResult(`🔌 Erro de conexão: ${err.message}`, "error"); }
+    };
+
+    document.getElementById("currentDate").value = new Date().toLocaleDateString('pt-BR');
+    renderQuestions();
+    populateStudentsByClass("");
+</script>
+</body>
+</html>
