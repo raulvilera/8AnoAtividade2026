@@ -9,59 +9,112 @@
         body { min-height:100vh; background:radial-gradient(circle at 10% 20%,#0a0f1e,#03060c); padding:32px 20px; position:relative; }
         body::before { content:""; position:fixed; top:0; left:0; width:100%; height:100%; background:repeating-linear-gradient(0deg,rgba(0,0,0,0.02) 0px,rgba(0,0,0,0.02) 2px,transparent 2px,transparent 6px); pointer-events:none; z-index:0; }
         .container { max-width:1000px; margin:0 auto; position:relative; z-index:2; }
+
+        /* ── HEADER ── */
         .header { background:linear-gradient(135deg,#050b14 0%,#0a1a2f 55%,#021126 100%); border-radius:2rem; padding:1.6rem 2rem; margin-bottom:2.5rem; box-shadow:0 20px 35px -12px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,255,255,0.05); border:1px solid rgba(25,80,150,0.4); }
-        .school-name { font-size:1.5rem; font-weight:800; text-align:center; background:linear-gradient(120deg,#b3e0ff,#3c7fb0); background-clip:text; -webkit-background-clip:text; color:transparent; text-shadow:0 2px 5px rgba(0,0,0,0.2); margin-bottom:1.8rem; }
-        .student-selector-area { display:flex; flex-wrap:wrap; gap:1.2rem; margin-bottom:1.8rem; background:rgba(0,10,25,0.5); padding:1rem 1.2rem; border-radius:1.5rem; backdrop-filter:blur(2px); align-items:flex-end; }
-        .selector-group { display:flex; flex-direction:column; gap:6px; width:auto; }
+        .school-name { font-size:1.5rem; font-weight:800; text-align:center; background:linear-gradient(120deg,#b3e0ff,#3c7fb0); background-clip:text; -webkit-background-clip:text; color:transparent; margin-bottom:1.8rem; }
+        .student-selector-area { display:flex; flex-wrap:wrap; gap:1.2rem; margin-bottom:1.8rem; background:rgba(0,10,25,0.5); padding:1rem 1.2rem; border-radius:1.5rem; align-items:flex-end; }
+        .selector-group { display:flex; flex-direction:column; gap:6px; }
         .selector-group label { font-weight:600; font-size:0.75rem; text-transform:uppercase; letter-spacing:1px; color:#8bb9e0; white-space:nowrap; }
-        .elegant-select { background:#0b1422; border:1px solid #1e3a5f; border-radius:60px; padding:10px 16px; font-size:0.85rem; font-weight:500; color:#eef5ff; transition:all 0.2s; cursor:pointer; outline:none; backdrop-filter:blur(4px); box-shadow:inset 0 1px 2px rgba(0,0,0,0.4),0 2px 5px rgba(0,0,0,0.2); width:auto; }
-        #classSelect { min-width:110px; width:auto; max-width:130px; }
-        #studentName { min-width:260px; width:auto; }
+        .elegant-select { background:#0b1422; border:1px solid #1e3a5f; border-radius:60px; padding:10px 16px; font-size:0.85rem; font-weight:500; color:#eef5ff; transition:all 0.2s; cursor:pointer; outline:none; box-shadow:inset 0 1px 2px rgba(0,0,0,0.4); }
+        #classSelect  { min-width:130px; }
+        #studentName  { min-width:270px; }
         .elegant-select:focus { border-color:#2c6e9e; box-shadow:0 0 0 3px rgba(44,110,158,0.3); background:#0f1a2c; }
         .info-row { display:flex; flex-wrap:wrap; gap:1rem; margin-top:0.8rem; align-items:center; }
-        .info-card { background:rgba(2,12,24,0.7); border-radius:60px; padding:0.4rem 1rem; display:inline-flex; align-items:baseline; gap:8px; backdrop-filter:blur(4px); border:1px solid #1c3e60; width:auto; }
+        .info-card { background:rgba(2,12,24,0.7); border-radius:60px; padding:0.4rem 1rem; display:inline-flex; align-items:baseline; gap:8px; border:1px solid #1c3e60; }
         .info-label { font-weight:700; font-size:0.7rem; color:#7da5ca; letter-spacing:0.5px; white-space:nowrap; }
-        .info-field-static { background:transparent; border:none; font-weight:600; color:#cde4ff; font-size:0.85rem; padding:4px 0; width:auto; outline:none; }
+        .info-field-static { background:transparent; border:none; font-weight:600; color:#cde4ff; font-size:0.85rem; padding:4px 0; outline:none; }
         #studentNumber { width:45px; text-align:center; }
-        #studentTurmaDisplay { width:auto; min-width:85px; }
+        #studentTurmaDisplay { min-width:90px; }
         #currentDate { width:100px; text-align:center; }
         .activity-title { text-align:center; margin-top:1.2rem; padding-top:1rem; border-top:1px dashed #1e4970; }
-        .activity-main { font-size:1.2rem; font-weight:800; display:block; color:#c2dcff; margin-bottom:0.6rem; letter-spacing:1px; }
-        .activity-sub { font-size:0.95rem; font-weight:600; color:#9bc0e0; display:block; letter-spacing:0.5px; }
-        .question-container { background:linear-gradient(145deg,#07121f 0%,#010a17 100%); border-radius:1.8rem; margin-bottom:2rem; padding:1.5rem 1.8rem; box-shadow:0 18px 30px -12px rgba(0,0,0,0.5),inset 0 1px 0 rgba(66,133,200,0.2); border:1px solid #1a3752; transition:transform 0.2s ease,box-shadow 0.2s; }
+        .activity-main { font-size:1.2rem; font-weight:800; display:block; color:#c2dcff; margin-bottom:0.4rem; letter-spacing:1px; }
+        .activity-sub  { font-size:0.95rem; font-weight:600; color:#9bc0e0; display:block; letter-spacing:0.5px; }
+
+        /* ── QUESTÕES ── */
+        .question-container { background:linear-gradient(145deg,#07121f 0%,#010a17 100%); border-radius:1.8rem; margin-bottom:2rem; padding:1.5rem 1.8rem; box-shadow:0 18px 30px -12px rgba(0,0,0,0.5),inset 0 1px 0 rgba(66,133,200,0.2); border:1px solid #1a3752; transition:transform 0.2s,box-shadow 0.2s; }
         .question-container:hover { transform:translateY(-3px); box-shadow:0 22px 35px -14px black; border-color:#2a6285; }
         .question { font-weight:700; font-size:1.05rem; line-height:1.45; color:#d9ecff; margin-bottom:1rem; padding-left:6px; border-left:4px solid #2c7ab1; }
         .question-image { max-width:100%; max-height:200px; object-fit:contain; margin:0.8rem 0; border-radius:1rem; background:#030c18; padding:8px; border:1px solid #204e72; }
         .options { display:flex; flex-direction:column; gap:12px; margin-top:16px; }
-        .option { background:linear-gradient(105deg,#0b1828,#030c1a); border-radius:60px; padding:10px 16px 10px 20px; cursor:pointer; transition:all 0.3s ease; border:1px solid #1f4562; color:#e2f0ff; font-weight:500; font-size:0.9rem; display:flex; align-items:center; gap:12px; box-shadow:0 2px 6px rgba(0,0,0,0.3); position:relative; }
-        .option::before { content:attr(data-letter)"."; font-weight:800; font-size:1rem; background:#152c40; width:28px; height:28px; display:inline-flex; align-items:center; justify-content:center; border-radius:40px; color:#b8defa; flex-shrink:0; transition:all 0.2s ease; }
-        .option:hover { background:linear-gradient(105deg,#102337,#04111f); border-color:#3f7dad; transform:scale(1.01); }
-        .option.selected { background:linear-gradient(105deg,#062a46,#001a30); border:1px solid #2c9bdb; color:white; box-shadow:0 0 0 2px rgba(44,155,219,0.4),0 0 0 6px rgba(44,155,219,0.2),0 0 15px rgba(44,155,219,0.5); animation:pulseGlow 1.2s ease-in-out infinite; }
-        @keyframes pulseGlow {
-            0%   { box-shadow:0 0 0 2px rgba(44,155,219,0.4),0 0 0 6px rgba(44,155,219,0.2),0 0 12px rgba(44,155,219,0.4); }
-            50%  { box-shadow:0 0 0 3px rgba(44,155,219,0.6),0 0 0 8px rgba(44,155,219,0.3),0 0 20px rgba(44,155,219,0.7); }
-            100% { box-shadow:0 0 0 2px rgba(44,155,219,0.4),0 0 0 6px rgba(44,155,219,0.2),0 0 12px rgba(44,155,219,0.4); }
+
+        /* ── OPÇÕES — normal ── */
+        .option {
+            background:linear-gradient(105deg,#0b1828,#030c1a);
+            border-radius:60px;
+            padding:10px 16px 10px 20px;
+            cursor:pointer;
+            transition:all 0.3s ease;
+            border:1px solid #1f4562;
+            color:#e2f0ff;
+            font-weight:500;
+            font-size:0.9rem;
+            display:flex;
+            align-items:center;
+            gap:12px;
+            box-shadow:0 2px 6px rgba(0,0,0,0.3);
         }
-        .option.selected::before { background:#1f6390; color:white; box-shadow:0 0 8px #3aa8ff; }
+        .option::before {
+            content:attr(data-letter)".";
+            font-weight:800;
+            font-size:1rem;
+            background:#152c40;
+            width:28px; height:28px;
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            border-radius:40px;
+            color:#b8defa;
+            flex-shrink:0;
+            transition:all 0.2s;
+        }
+        .option:hover { background:linear-gradient(105deg,#102337,#04111f); border-color:#3f7dad; transform:scale(1.01); }
+
+        /* ── OPÇÃO SELECIONADA — VERDE NEON ── */
+        .option.selected {
+            background:linear-gradient(105deg,#003d1a,#001a0a);
+            border:1px solid #00ff88;
+            color:#ccffe6;
+            box-shadow:
+                0 0 0 2px rgba(0,255,136,0.35),
+                0 0 0 6px rgba(0,255,136,0.15),
+                0 0 18px rgba(0,255,136,0.55),
+                0 0 35px rgba(0,255,136,0.2);
+            animation:neonPulse 1.4s ease-in-out infinite;
+        }
+        @keyframes neonPulse {
+            0%   { box-shadow: 0 0 0 2px rgba(0,255,136,0.35), 0 0 0 6px rgba(0,255,136,0.15), 0 0 14px rgba(0,255,136,0.5),  0 0 28px rgba(0,255,136,0.15); }
+            50%  { box-shadow: 0 0 0 3px rgba(0,255,136,0.55), 0 0 0 9px rgba(0,255,136,0.25), 0 0 24px rgba(0,255,136,0.75), 0 0 45px rgba(0,255,136,0.3);  }
+            100% { box-shadow: 0 0 0 2px rgba(0,255,136,0.35), 0 0 0 6px rgba(0,255,136,0.15), 0 0 14px rgba(0,255,136,0.5),  0 0 28px rgba(0,255,136,0.15); }
+        }
+        .option.selected::before {
+            background:#005c2a;
+            color:#00ff88;
+            box-shadow:0 0 10px #00ff88, 0 0 20px rgba(0,255,136,0.5);
+            text-shadow:0 0 8px #00ff88;
+        }
+
+        /* ── BOTÕES ── */
         .buttons { display:flex; gap:1rem; margin:2rem 0 1.5rem; flex-wrap:wrap; }
         button { flex:1; padding:12px 24px; font-weight:700; font-size:0.95rem; border:none; border-radius:60px; background:linear-gradient(115deg,#0a1a2c,#021023); color:#e3f0ff; cursor:pointer; transition:0.2s; box-shadow:0 6px 14px rgba(0,0,0,0.4); border:1px solid #2b6085; }
         button:hover { transform:translateY(-2px); background:linear-gradient(115deg,#112a42,#02172f); border-color:#4188b5; }
         button:active { transform:translateY(1px); }
         #submitBtn { background:linear-gradient(115deg,#0f3b58,#011b30); border-color:#3e86b3; }
+        #submitBtn:disabled { opacity:0.5; cursor:not-allowed; transform:none; }
+
+        /* ── RESULTADO ── */
         .result { margin-top:20px; padding:0.8rem 1.5rem; border-radius:3rem; background:linear-gradient(145deg,#0b1729,#030c1a); border-left:6px solid; display:none; font-weight:500; font-size:0.9rem; }
         .success { border-left-color:#2bc48a; color:#c6ffdf; background:#05221b80; }
         .error   { border-left-color:#e05561; color:#ffcfcf; background:#2f0f1480; }
+
         @media (max-width:700px) {
             .header { padding:1.2rem; }
             .question-container { padding:1.2rem; }
             .option { padding:8px 12px; font-size:0.85rem; }
-            .student-selector-area { flex-direction:column; align-items:stretch; }
-            .selector-group { width:100%; }
+            .student-selector-area { flex-direction:column; }
             .elegant-select { width:100%; }
-            #classSelect { max-width:none; }
+            #classSelect { min-width:unset; }
             #studentName { min-width:unset; }
-            .info-row { flex-direction:column; align-items:stretch; }
-            .info-card { width:fit-content; }
         }
     </style>
 </head>
@@ -69,6 +122,7 @@
 <div class="container">
     <div class="header">
         <div class="school-name">E.E. PROFª WANDA MASCAGNI DE SÁ</div>
+
         <div class="student-selector-area">
             <div class="selector-group">
                 <label>📌 1. SELECIONE SUA TURMA</label>
@@ -85,6 +139,7 @@
                 </select>
             </div>
         </div>
+
         <div class="info-row">
             <div class="info-card">
                 <span class="info-label">Nº:</span>
@@ -99,6 +154,7 @@
                 <input type="text" id="currentDate" class="info-field-static" readonly>
             </div>
         </div>
+
         <div class="activity-title">
             <div class="activity-main">ATIVIDADE DE CIÊNCIAS</div>
             <div class="activity-sub">REPRODUÇÃO E HEREDITARIEDADE — 8º ANO</div>
@@ -116,86 +172,86 @@
 
 <script>
 /* ============================================================
-   CONFIGURAÇÃO — substitua pela URL gerada no Apps Script
+   URL DO APPS SCRIPT
    ============================================================ */
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyuUyETIuedRNKMhRqlKWudm-hEo8sJF8CXRQx4Fr4aPZWQ2l9fXgIJ_dWMljAzowo8/exec";
 
 /* ============================================================
-   LISTA DE ALUNOS
+   ALUNOS
    ============================================================ */
 const students = {
     "8º Ano A": [
-        { number: "1",  name: "ALICE CARDOSO DE ALCANTARA" },
-        { number: "2",  name: "ANA LUIZA VALENCA PAIVA" },
-        { number: "3",  name: "BRYAN DINIZ SILVA" },
-        { number: "4",  name: "CARLOS EDUARDO MENEZES MACHADO" },
-        { number: "5",  name: "EVANDRO CUTOLO TEIXEIRA" },
-        { number: "7",  name: "GABRIELA SANTOS COSTA" },
-        { number: "9",  name: "GUILHERME CARMO RODRIGUES" },
-        { number: "10", name: "GUSTAVO HENRIQUE DA SILVA" },
-        { number: "11", name: "ISAAC FERNANDES DE ANDRADE" },
-        { number: "12", name: "KELVIN DUARTE GONCALVES" },
-        { number: "13", name: "LAURA VITORIA ROCHA" },
-        { number: "14", name: "LETICIA CUSTODIO LIMA" },
-        { number: "15", name: "LUCAS EDUARDO DA SILVA SANTANA" },
-        { number: "16", name: "MIGUEL LIMA DE MESQUITA" },
-        { number: "17", name: "NICOLAS ROCHA SILVA" },
-        { number: "18", name: "PAOLLA MICHELLINE DOS SANTOS MARQUES" },
-        { number: "19", name: "PEDRO HENRIQUE CORREA DE BRITO" },
-        { number: "20", name: "RAPHAEL MATHIAS NUNES MIRANDA" },
-        { number: "21", name: "RYAN GABRIEL PEREIRA DE SOUSA" },
-        { number: "22", name: "SAMUEL ALVES DA COSTA" },
-        { number: "23", name: "SOFIA AZEREDO CUBAS" },
-        { number: "24", name: "SOPHIA LACERDA ANDRADE" },
-        { number: "25", name: "THAYLLA DUANNY VENANCIO SCAQUITO" },
-        { number: "26", name: "THAYS RODRIGUES DA SILVA" },
-        { number: "27", name: "VICTOR HENRIQUE BENVINDO" },
-        { number: "28", name: "KAROLAYNE DOS SANTOS BISSORNIA" },
-        { number: "29", name: "ANA VICTORIA RAGACINI DE OLIVEIRA" },
-        { number: "31", name: "RODOLFO RAFAEL GOLZENLEUCHTER MORENO JUNIOR" },
-        { number: "32", name: "RAQUEL BARGAS TAVARES DOS SANTOS" },
-        { number: "33", name: "LEONARDO MENOIA" },
-        { number: "34", name: "MATHEUS KAUÃ DOS SANTOS NASCIMENTO" },
-        { number: "35", name: "MAYARA CAETANO DE OLIVEIRA PINA" },
-        { number: "36", name: "ANA CLARA VILA NOVA GONCALVES" },
-        { number: "37", name: "PATRICIA SEGURA" },
-        { number: "38", name: "RAFAEL HENRIQUE SIQUEIRA BERNARDES ZIA" }
+        { number:"1",  name:"ALICE CARDOSO DE ALCANTARA" },
+        { number:"2",  name:"ANA LUIZA VALENCA PAIVA" },
+        { number:"3",  name:"BRYAN DINIZ SILVA" },
+        { number:"4",  name:"CARLOS EDUARDO MENEZES MACHADO" },
+        { number:"5",  name:"EVANDRO CUTOLO TEIXEIRA" },
+        { number:"7",  name:"GABRIELA SANTOS COSTA" },
+        { number:"9",  name:"GUILHERME CARMO RODRIGUES" },
+        { number:"10", name:"GUSTAVO HENRIQUE DA SILVA" },
+        { number:"11", name:"ISAAC FERNANDES DE ANDRADE" },
+        { number:"12", name:"KELVIN DUARTE GONCALVES" },
+        { number:"13", name:"LAURA VITORIA ROCHA" },
+        { number:"14", name:"LETICIA CUSTODIO LIMA" },
+        { number:"15", name:"LUCAS EDUARDO DA SILVA SANTANA" },
+        { number:"16", name:"MIGUEL LIMA DE MESQUITA" },
+        { number:"17", name:"NICOLAS ROCHA SILVA" },
+        { number:"18", name:"PAOLLA MICHELLINE DOS SANTOS MARQUES" },
+        { number:"19", name:"PEDRO HENRIQUE CORREA DE BRITO" },
+        { number:"20", name:"RAPHAEL MATHIAS NUNES MIRANDA" },
+        { number:"21", name:"RYAN GABRIEL PEREIRA DE SOUSA" },
+        { number:"22", name:"SAMUEL ALVES DA COSTA" },
+        { number:"23", name:"SOFIA AZEREDO CUBAS" },
+        { number:"24", name:"SOPHIA LACERDA ANDRADE" },
+        { number:"25", name:"THAYLLA DUANNY VENANCIO SCAQUITO" },
+        { number:"26", name:"THAYS RODRIGUES DA SILVA" },
+        { number:"27", name:"VICTOR HENRIQUE BENVINDO" },
+        { number:"28", name:"KAROLAYNE DOS SANTOS BISSORNIA" },
+        { number:"29", name:"ANA VICTORIA RAGACINI DE OLIVEIRA" },
+        { number:"31", name:"RODOLFO RAFAEL GOLZENLEUCHTER MORENO JUNIOR" },
+        { number:"32", name:"RAQUEL BARGAS TAVARES DOS SANTOS" },
+        { number:"33", name:"LEONARDO MENOIA" },
+        { number:"34", name:"MATHEUS KAUÃ DOS SANTOS NASCIMENTO" },
+        { number:"35", name:"MAYARA CAETANO DE OLIVEIRA PINA" },
+        { number:"36", name:"ANA CLARA VILA NOVA GONCALVES" },
+        { number:"37", name:"PATRICIA SEGURA" },
+        { number:"38", name:"RAFAEL HENRIQUE SIQUEIRA BERNARDES ZIA" }
     ],
     "8º Ano B": [
-        { number: "1",  name: "ANGELLO GABRIEL CUTOLO TEIXEIRA" },
-        { number: "2",  name: "ARTHUR HENRIQUE MARQUES ENDRES" },
-        { number: "3",  name: "BIANCA CRISTINA DA SILVA SANTOS" },
-        { number: "4",  name: "BRAYAN DA SILVA FERREIRA" },
-        { number: "5",  name: "BRAYAN DUARTE DA SILVA" },
-        { number: "6",  name: "BRUNO LUIZ NASCIMENTO DA SILVA" },
-        { number: "7",  name: "CRISTIANO MARQUES BATISTA DE SOUZA" },
-        { number: "8",  name: "DANIEL RODRIGUES SANTOS DIAS" },
-        { number: "9",  name: "DIEGO BARRIO NOVO AMARAL DE ANDRADE" },
-        { number: "10", name: "FABRICIO LORENZO PARMA" },
-        { number: "11", name: "GABRIELA PAULINA FERREIRA MARTINS" },
-        { number: "12", name: "HYLLARY VICTORIA NERCIR DE FRANÇA" },
-        { number: "13", name: "JHONAS KEYRRISON TROCATIS DA SILVA" },
-        { number: "14", name: "JULIA VITORIA SEVERA LINS" },
-        { number: "16", name: "KESIA DOS SANTOS SOSTE" },
-        { number: "17", name: "LAURA BORGES AZEVEDO" },
-        { number: "18", name: "LUAN DANTAS NICOLUCCI" },
-        { number: "19", name: "LUAN RIBEIRO SILVA" },
-        { number: "20", name: "MANUELA ANGELICA TRIANA DA SILVA" },
-        { number: "21", name: "MARCELO GOMES THOMAZ" },
-        { number: "22", name: "MARCOS CELIO DE JESUS" },
-        { number: "25", name: "PAULO CESAR LAMBERT GONÇALVES" },
-        { number: "26", name: "PEDRO HENRIQUE OLIVEIRA GOMES" },
-        { number: "27", name: "PIETRO MARTINS NOBRE" },
-        { number: "28", name: "SOPHIA FRANCA DE CARVALHO" },
-        { number: "29", name: "VICTOR HUGO PRADO SANTOS DE BARROS" },
-        { number: "31", name: "WALLIF LEANDRO DE JESUS LESSA" },
-        { number: "33", name: "VITORIA JOLIE RODRIGUES RAPOSO" },
-        { number: "34", name: "ISAAC BONFIM VIDOTTO" },
-        { number: "35", name: "MATEUS DE JESUS JACINTO DOS SANTOS" },
-        { number: "36", name: "KHIARA DE OLIVEIRA SILVA" },
-        { number: "37", name: "MARIA EDUARDA MACHADO DE LIMA" },
-        { number: "40", name: "ESTER CODINA DE JESUS" },
-        { number: "41", name: "PABLO HENRIQUE DUARTE DA SILVA" }
+        { number:"1",  name:"ANGELLO GABRIEL CUTOLO TEIXEIRA" },
+        { number:"2",  name:"ARTHUR HENRIQUE MARQUES ENDRES" },
+        { number:"3",  name:"BIANCA CRISTINA DA SILVA SANTOS" },
+        { number:"4",  name:"BRAYAN DA SILVA FERREIRA" },
+        { number:"5",  name:"BRAYAN DUARTE DA SILVA" },
+        { number:"6",  name:"BRUNO LUIZ NASCIMENTO DA SILVA" },
+        { number:"7",  name:"CRISTIANO MARQUES BATISTA DE SOUZA" },
+        { number:"8",  name:"DANIEL RODRIGUES SANTOS DIAS" },
+        { number:"9",  name:"DIEGO BARRIO NOVO AMARAL DE ANDRADE" },
+        { number:"10", name:"FABRICIO LORENZO PARMA" },
+        { number:"11", name:"GABRIELA PAULINA FERREIRA MARTINS" },
+        { number:"12", name:"HYLLARY VICTORIA NERCIR DE FRANÇA" },
+        { number:"13", name:"JHONAS KEYRRISON TROCATIS DA SILVA" },
+        { number:"14", name:"JULIA VITORIA SEVERA LINS" },
+        { number:"16", name:"KESIA DOS SANTOS SOSTE" },
+        { number:"17", name:"LAURA BORGES AZEVEDO" },
+        { number:"18", name:"LUAN DANTAS NICOLUCCI" },
+        { number:"19", name:"LUAN RIBEIRO SILVA" },
+        { number:"20", name:"MANUELA ANGELICA TRIANA DA SILVA" },
+        { number:"21", name:"MARCELO GOMES THOMAZ" },
+        { number:"22", name:"MARCOS CELIO DE JESUS" },
+        { number:"25", name:"PAULO CESAR LAMBERT GONÇALVES" },
+        { number:"26", name:"PEDRO HENRIQUE OLIVEIRA GOMES" },
+        { number:"27", name:"PIETRO MARTINS NOBRE" },
+        { number:"28", name:"SOPHIA FRANCA DE CARVALHO" },
+        { number:"29", name:"VICTOR HUGO PRADO SANTOS DE BARROS" },
+        { number:"31", name:"WALLIF LEANDRO DE JESUS LESSA" },
+        { number:"33", name:"VITORIA JOLIE RODRIGUES RAPOSO" },
+        { number:"34", name:"ISAAC BONFIM VIDOTTO" },
+        { number:"35", name:"MATEUS DE JESUS JACINTO DOS SANTOS" },
+        { number:"36", name:"KHIARA DE OLIVEIRA SILVA" },
+        { number:"37", name:"MARIA EDUARDA MACHADO DE LIMA" },
+        { number:"40", name:"ESTER CODINA DE JESUS" },
+        { number:"41", name:"PABLO HENRIQUE DUARTE DA SILVA" }
     ]
 };
 
@@ -233,6 +289,7 @@ function showResult(msg, type) {
     el.innerHTML = msg;
     el.className = `result ${type}`;
     el.style.display = "block";
+    el.scrollIntoView({ behavior: "smooth", block: "nearest" });
 }
 function hideResult() { document.getElementById("resultMessage").style.display = "none"; }
 
@@ -268,7 +325,7 @@ function renderQuestions() {
 }
 
 /* ============================================================
-   POPULA ALUNOS POR TURMA
+   POPULA ALUNOS — usa data-* em vez de split, 100% seguro
    ============================================================ */
 function populateStudentsByClass(className) {
     const studentSelect = document.getElementById("studentName");
@@ -284,11 +341,13 @@ function populateStudentsByClass(className) {
     studentSelect.disabled = false;
     students[className].forEach(s => {
         const opt = document.createElement("option");
-        // Separador ||| evita conflito com qualquer caractere nos nomes
-        opt.value = `${s.number}|||${className}|||${s.name}`;
-        opt.textContent = s.name;
+        opt.value = s.number;               // value = só o número de chamada
+        opt.dataset.turma = className;      // turma em data-turma
+        opt.dataset.nome  = s.name;         // nome completo em data-nome
+        opt.textContent   = s.name;
         studentSelect.appendChild(opt);
     });
+
     document.getElementById("studentTurmaDisplay").value = className;
     document.getElementById("studentNumber").value = "—";
 }
@@ -302,9 +361,11 @@ document.getElementById("classSelect").addEventListener("change", (e) => {
 });
 
 document.getElementById("studentName").addEventListener("change", (e) => {
-    if (!e.target.value) { document.getElementById("studentNumber").value = "—"; return; }
-    const parts = e.target.value.split("|||");
-    document.getElementById("studentNumber").value = parts[0] || "—";
+    const sel = e.target;
+    if (!sel.value) { document.getElementById("studentNumber").value = "—"; return; }
+    const selectedOpt = sel.options[sel.selectedIndex];
+    document.getElementById("studentNumber").value = sel.value;
+    document.getElementById("studentTurmaDisplay").value = selectedOpt.dataset.turma || "—";
     hideResult();
 });
 
@@ -314,7 +375,7 @@ document.getElementById("clearBtn").onclick = () => {
 };
 
 /* ============================================================
-   ENVIO FINAL
+   ENVIO — lê data-* diretamente do option selecionado
    ============================================================ */
 document.getElementById("submitBtn").onclick = async () => {
     hideResult();
@@ -323,18 +384,18 @@ document.getElementById("submitBtn").onclick = async () => {
     const studentSelect = document.getElementById("studentName");
 
     if (!classSelect.value)   { showResult("❌ Primeiro selecione a TURMA.", "error"); return; }
-    if (!studentSelect.value) { showResult("❌ Agora selecione seu NOME.", "error"); return; }
+    if (!studentSelect.value) { showResult("❌ Agora selecione seu NOME.", "error");   return; }
 
-    // Extrai dados com separador seguro |||
-    const parts         = studentSelect.value.split("|||");
-    const studentNumber = parts[0] || "";
-    const studentTurma  = parts[1] || "";   // campo enviado ao Apps Script
-    const studentName   = parts[2] || "";
+    // ── Lê os dados do option selecionado via data-* ──────────
+    const selectedOpt   = studentSelect.options[studentSelect.selectedIndex];
+    const studentNumber = studentSelect.value;                  // número de chamada
+    const studentTurma  = selectedOpt.dataset.turma || "";      // "8º Ano A" ou "8º Ano B"
+    const studentName   = selectedOpt.dataset.nome  || "";      // nome completo
 
-    // Verifica se todas as questões foram respondidas
+    // ── Verifica respostas ────────────────────────────────────
     let allAnswered = true;
     const answers   = {};
-    for (let q of questions) {
+    for (const q of questions) {
         const selected = document.querySelector(`#q${q.id} .option.selected`);
         if (!selected) { allAnswered = false; break; }
         answers[`q${q.id}`] = selected.dataset.letter;
@@ -344,17 +405,17 @@ document.getElementById("submitBtn").onclick = async () => {
         return;
     }
 
-    // Contagem local (só para feedback imediato — o servidor recalcula)
+    // Contagem local para feedback
     let correctCount = 0;
-    for (let q of questions) {
+    for (const q of questions) {
         if (answers[`q${q.id}`] === correctAnswersMap[`q${q.id}`]) correctCount++;
     }
 
-    // Payload completo
+    // ── Payload ───────────────────────────────────────────────
     const payload = {
         studentName,
         studentNumber,
-        studentTurma,           // Apps Script lê este campo para determinar a aba
+        studentTurma,       // Apps Script usa este campo para escolher a aba
         finalScore    : correctCount,
         totalQuestions: questions.length,
         percentage    : (correctCount / questions.length) * 100,
@@ -367,10 +428,10 @@ document.getElementById("submitBtn").onclick = async () => {
         const response = await fetch(GOOGLE_SCRIPT_URL, { method: "POST", body: JSON.stringify(payload) });
         const json     = await response.json();
         if (json.status === "success") {
-            showResult(`✅ Registrado com sucesso! Nota: ${correctCount}/${questions.length}.`, "success");
+            showResult(`✅ Registrado! Nota: ${correctCount}/${questions.length}.`, "success");
             document.getElementById("submitBtn").disabled = true;
         } else {
-            showResult(`⚠️ Erro no servidor: ${json.message || "tente novamente"}`, "error");
+            showResult(`⚠️ Erro: ${json.message || "tente novamente"}`, "error");
         }
     } catch (err) {
         showResult(`🔌 Erro de conexão: ${err.message}`, "error");
