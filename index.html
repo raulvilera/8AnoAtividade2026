@@ -35,7 +35,42 @@
         .question-container { background:linear-gradient(145deg,#07121f 0%,#010a17 100%); border-radius:1.8rem; margin-bottom:2rem; padding:1.5rem 1.8rem; box-shadow:0 18px 30px -12px rgba(0,0,0,0.5),inset 0 1px 0 rgba(66,133,200,0.2); border:1px solid #1a3752; transition:transform 0.2s,box-shadow 0.2s; }
         .question-container:hover { transform:translateY(-3px); box-shadow:0 22px 35px -14px black; border-color:#2a6285; }
         .question { font-weight:700; font-size:1.05rem; line-height:1.45; color:#d9ecff; margin-bottom:1rem; padding-left:6px; border-left:4px solid #2c7ab1; }
-        .question-image { max-width:100%; max-height:200px; object-fit:contain; margin:0.8rem 0; border-radius:1rem; background:#030c18; padding:8px; border:1px solid #204e72; }
+        .images-area {
+            display:flex;
+            flex-wrap:wrap;
+            gap:10px;
+            margin:0.8rem 0 1rem 0;
+            justify-content:center;
+        }
+        .question-image {
+            max-width:100%;
+            max-height:260px;
+            object-fit:contain;
+            border-radius:1rem;
+            background:#030c18;
+            padding:8px;
+            border:1px solid #204e72;
+            flex:1 1 calc(50% - 10px);
+            min-width:180px;
+            cursor:zoom-in;
+            transition:transform 0.2s;
+        }
+        .question-image:hover { transform:scale(1.02); }
+        .question-image.single { max-width:480px; flex:0 0 auto; }
+
+        /* Lightbox */
+        .lightbox-overlay {
+            display:none;
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,0.92);
+            z-index:9999;
+            align-items:center;
+            justify-content:center;
+            cursor:zoom-out;
+        }
+        .lightbox-overlay.active { display:flex; }
+        .lightbox-overlay img { max-width:92vw; max-height:90vh; border-radius:1rem; border:2px solid #1e4a70; }
         .options { display:flex; flex-direction:column; gap:12px; margin-top:16px; }
 
         /* ── OPÇÕES — normal ── */
@@ -174,7 +209,7 @@
 /* ============================================================
    URL DO APPS SCRIPT
    ============================================================ */
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyuUyETIuedRNKMhRqlKWudm-hEo8sJF8CXRQx4Fr4aPZWQ2l9fXgIJ_dWMljAzowo8/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzRuRT56Oh8iS2pxv6qKHTJzAtYfbRg97nUbPuXXERNOESab0sZy9BduyNoUwvVq166/exec";
 
 /* ============================================================
    ALUNOS
@@ -309,9 +344,18 @@ function renderQuestions() {
             optsHtml += `<div class="option" data-question="${q.id}" data-letter="${letter}">${opt.text}</div>`;
         });
         optsHtml += `</div>`;
+        // Suporta tanto image (string) quanto images (array)
+        const imgs = q.images ? q.images : (q.image ? [q.image] : []);
+        const imgsHtml = imgs.length > 0
+            ? `<div class="images-area">${imgs.map(url =>
+                `<img src="${url}" class="question-image${imgs.length === 1 ? ' single' : ''}"
+                      onerror="this.style.display='none'"
+                      onclick="openLightbox(this.src)">`).join("")}</div>`
+            : "";
+
         block.innerHTML = `
             <p class="question"><strong>${q.id}.</strong> ${q.question}</p>
-            ${q.image ? `<img src="${q.image}" class="question-image" onerror="this.style.display='none'">` : ""}
+            ${imgsHtml}
             ${optsHtml}`;
         container.appendChild(block);
     });
@@ -444,6 +488,21 @@ document.getElementById("submitBtn").onclick = async () => {
 document.getElementById("currentDate").value = new Date().toLocaleDateString("pt-BR");
 renderQuestions();
 populateStudentsByClass("");
+</script>
+
+<!-- Lightbox para zoom nas imagens -->
+<div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox()">
+    <img id="lightboxImg" src="" alt="Imagem ampliada">
+</div>
+<script>
+function openLightbox(src) {
+    document.getElementById("lightboxImg").src = src;
+    document.getElementById("lightboxOverlay").classList.add("active");
+}
+function closeLightbox() {
+    document.getElementById("lightboxOverlay").classList.remove("active");
+}
+document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeLightbox(); });
 </script>
 </body>
 </html>
